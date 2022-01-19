@@ -1,16 +1,18 @@
 #include <stdio.h>
-#include<stdlib.h>
-struct Node *f = NULL;
-struct Node *r = NULL;
+#include <stdlib.h>
 
-struct Node
+struct queue
 {
     int data;
-    struct Node *next;
+    struct queue *next;
 };
 
-void display(struct Node *ptr)
+struct queue *f = NULL;
+struct queue *r = NULL;
+
+void displayQueue()
 {
+    struct queue *ptr = f;
     printf("Elements in the queue \n");
     while (ptr != NULL)
     {
@@ -18,12 +20,34 @@ void display(struct Node *ptr)
         ptr = ptr->next;
     }
 }
-void enqueue()
+
+int isQueueEmpty()
 {
-    int val;
-    printf("Enter the value \n");
-    scanf("%d", &val);
-    struct Node *n = (struct Node *)malloc(sizeof(struct Node));
+    if (f == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int isQueueFull()
+{
+    struct queue *n = (struct queue *)malloc(sizeof(struct queue));
+    if (n == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void enqueue(int val)
+{
+    struct queue *n = (struct queue *)malloc(sizeof(struct queue));
     if (n == NULL)
     {
         printf("The queue is full");
@@ -46,10 +70,10 @@ void enqueue()
 void dequeue()
 {
     int val;
-    struct Node *ptr = f;
+    struct queue *ptr = f;
     if (f == NULL)
     {
-        printf("The queue is Empty");
+        printf("The queue is Empty \n");
     }
     else
     {

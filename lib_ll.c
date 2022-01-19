@@ -1,16 +1,20 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-struct Node{
+struct LinkedlistNode
+{
     int data;
     char name[10];
     char prn[10];
     int designation;
-    struct Node * next;
+    struct LinkedlistNode *next;
 };
 
-void display(struct Node *head)
+struct LinkedlistNode *head = NULL;
+
+void displayLinkedlist(struct LinkedlistNode *head)
 {
-    struct Node *temp = head;
+    struct LinkedlistNode *temp = head;
     if (head == NULL)
     {
         printf("List is empty");
@@ -25,20 +29,22 @@ void display(struct Node *head)
     printf("NULL ]\n");
 }
 // Case 1
-struct Node * insertAtFirst(struct Node *head, int data){
-    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
+struct LinkedlistNode *insertAtFirstLinkedlist(struct LinkedlistNode *head, int data)
+{
+    struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
     ptr->data = data;
 
     ptr->next = head;
-    return ptr; 
+    return ptr;
 }
 // Case 2
-struct Node * insertAtIndex(struct Node *head, int data, int index){
-    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
-    struct Node * p = head;
+struct LinkedlistNode *insertAtIndexLinkedlist(struct LinkedlistNode *head, int data, int index)
+{
+    struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
+    struct LinkedlistNode *p = head;
     int i = 0;
 
-    while (i!=index-1)
+    while (i != index - 1)
     {
         p = p->next;
         i++;
@@ -49,12 +55,14 @@ struct Node * insertAtIndex(struct Node *head, int data, int index){
     return head;
 }
 // Case 3
-struct Node * insertAtEnd(struct Node *head, int data){
-    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
+struct LinkedlistNode *insertAtEndLinkedlist(struct LinkedlistNode *head, int data)
+{
+    struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
     ptr->data = data;
-    struct Node * p = head;
+    struct LinkedlistNode *p = head;
 
-    while(p->next!=NULL){
+    while (p->next != NULL)
+    {
         p = p->next;
     }
     p->next = ptr;
@@ -62,31 +70,31 @@ struct Node * insertAtEnd(struct Node *head, int data){
     return head;
 }
 // Case 4
-struct Node * insertAfterNode(struct Node *head, struct Node *prevNode, int data){
-    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
+struct LinkedlistNode *insertAfterLinkedlistNodeLinkedlist(struct LinkedlistNode *head, struct LinkedlistNode *prevLinkedlistNode, int data)
+{
+    struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
     ptr->data = data;
 
-    ptr->next = prevNode->next;
-    prevNode->next = ptr;
+    ptr->next = prevLinkedlistNode->next;
+    prevLinkedlistNode->next = ptr;
 
-    
     return head;
 }
-//Deleting first node from the linked list
-struct Node *deletefirst(struct Node *head)
+// Deleting first LinkedlistNode from the linked list
+struct LinkedlistNode *deletefirstLinkedlist(struct LinkedlistNode *head)
 {
-    struct Node *ptr = head;
+    struct LinkedlistNode *ptr = head;
     head = head->next;
     // Make as president
     free(ptr);
     return head;
 }
-//Deleting a node at particular index
-struct Node *deleteAtIndex(struct Node *head, int index)
+// Deleting a LinkedlistNode at particular index
+struct LinkedlistNode *deleteAtIndexLinkedlist(struct LinkedlistNode *head, int index)
 {
-    struct Node *p = head;
-    struct Node *q = head->next;
-    //The q pointer should be present at the node which has to be deleted
+    struct LinkedlistNode *p = head;
+    struct LinkedlistNode *q = head->next;
+    // The q pointer should be present at the LinkedlistNode which has to be deleted
     for (int i = 0; i < index - 1; i++)
     {
         p = p->next;
@@ -96,11 +104,11 @@ struct Node *deleteAtIndex(struct Node *head, int index)
     free(q);
     return head;
 }
-//Deleting a node at last
-struct Node *deletelast(struct Node *head)
+// Deleting a LinkedlistNode at last
+struct LinkedlistNode *deletelastLinkedlist(struct LinkedlistNode *head)
 {
-    struct Node *p = head;
-    struct Node *q = head->next;
+    struct LinkedlistNode *p = head;
+    struct LinkedlistNode *q = head->next;
     while (q->next != NULL)
     {
         p = p->next;
@@ -111,21 +119,20 @@ struct Node *deletelast(struct Node *head)
     free(q);
     return head;
 }
-//Deleting a node having a given value
-struct Node *deletenode(struct Node *head , int value)
+// Deleting a LinkedlistNode having a given value
+struct LinkedlistNode *deleteLinkedlistNode(struct LinkedlistNode *head, int value)
 {
-    struct Node *p = head;
-    struct Node *q = head->next;
-    while (q->data!=value && q->next!=NULL)
+    struct LinkedlistNode *p = head;
+    struct LinkedlistNode *q = head->next;
+    while (q->data != value && q->next != NULL)
     {
         p = p->next;
         q = q->next;
     }
-    if(q->data == value)
+    if (q->data == value)
     {
         p->next = q->next;
         free(q);
     }
     return head;
 }
-
