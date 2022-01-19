@@ -4,16 +4,15 @@
 struct LinkedlistNode
 {
     int data;
-    char name[10];
-    char prn[10];
-    int designation;
     struct LinkedlistNode *next;
 };
 
 struct LinkedlistNode *head = NULL;
 
-void displayLinkedlist(struct LinkedlistNode *head)
-{
+void displayLinkedlist()
+{   
+
+    struct LinkedlistNode *head;
     struct LinkedlistNode *temp = head;
     if (head == NULL)
     {
@@ -29,16 +28,35 @@ void displayLinkedlist(struct LinkedlistNode *head)
     printf("NULL ]\n");
 }
 // Case 1
-struct LinkedlistNode *insertAtFirstLinkedlist(struct LinkedlistNode *head, int data)
+int is_empty()
 {
-    struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
-    ptr->data = data;
-
-    ptr->next = head;
-    return ptr;
+    if (head == NULL)
+    {
+        printf("the list is empty\n");
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void insertAtFirstLinkedlist(int data)
+{
+    if (is_empty())
+    {
+        head->data = data;
+        head->next = NULL;
+    }
+    else
+    {
+        struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
+        ptr->data = data;
+        ptr->next = head;
+        head = ptr;
+    }
 }
 // Case 2
-struct LinkedlistNode *insertAtIndexLinkedlist(struct LinkedlistNode *head, int data, int index)
+void insertAtIndexLinkedlist(int data, int index)
 {
     struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
     struct LinkedlistNode *p = head;
@@ -52,45 +70,33 @@ struct LinkedlistNode *insertAtIndexLinkedlist(struct LinkedlistNode *head, int 
     ptr->data = data;
     ptr->next = p->next;
     p->next = ptr;
-    return head;
 }
 // Case 3
-struct LinkedlistNode *insertAtEndLinkedlist(struct LinkedlistNode *head, int data)
+void insertAtEndLinkedlist(int data)
 {
+
     struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
     ptr->data = data;
     struct LinkedlistNode *p = head;
-
     while (p->next != NULL)
     {
         p = p->next;
     }
     p->next = ptr;
     ptr->next = NULL;
-    return head;
 }
-// Case 4
-struct LinkedlistNode *insertAfterLinkedlistNodeLinkedlist(struct LinkedlistNode *head, struct LinkedlistNode *prevLinkedlistNode, int data)
-{
-    struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
-    ptr->data = data;
 
-    ptr->next = prevLinkedlistNode->next;
-    prevLinkedlistNode->next = ptr;
-
-    return head;
-}
 // Deleting first LinkedlistNode from the linked list
-struct LinkedlistNode *deletefirstLinkedlist(struct LinkedlistNode *head)
+void deleteAtfirstLinkedlist()
 {
     struct LinkedlistNode *ptr = head;
     head = head->next;
     // Make as president
     free(ptr);
-    return head;
 }
+
 // Deleting a LinkedlistNode at particular index
-struct LinkedlistNode *deleteAtIndexLinkedlist(struct LinkedlistNode *head, int index)
+void deleteAtIndexLinkedlist(int index)
 {
     struct LinkedlistNode *p = head;
     struct LinkedlistNode *q = head->next;
@@ -102,10 +108,9 @@ struct LinkedlistNode *deleteAtIndexLinkedlist(struct LinkedlistNode *head, int 
     }
     p->next = q->next;
     free(q);
-    return head;
 }
 // Deleting a LinkedlistNode at last
-struct LinkedlistNode *deletelastLinkedlist(struct LinkedlistNode *head)
+void deletelastLinkedlist()
 {
     struct LinkedlistNode *p = head;
     struct LinkedlistNode *q = head->next;
@@ -117,10 +122,9 @@ struct LinkedlistNode *deletelastLinkedlist(struct LinkedlistNode *head)
     // Make as secretary
     p->next = NULL;
     free(q);
-    return head;
 }
 // Deleting a LinkedlistNode having a given value
-struct LinkedlistNode *deleteLinkedlistNode(struct LinkedlistNode *head, int value)
+void deleteLinkedlistNode(int value)
 {
     struct LinkedlistNode *p = head;
     struct LinkedlistNode *q = head->next;
@@ -134,5 +138,4 @@ struct LinkedlistNode *deleteLinkedlistNode(struct LinkedlistNode *head, int val
         p->next = q->next;
         free(q);
     }
-    return head;
 }

@@ -1,100 +1,79 @@
-
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
-typedef struct stack
+
+struct Node
 {
     int data;
-    struct stack *next;
-} node;
+    struct Node *next;
+};
 
-void push();
-void pop();
-void display();
+struct Node *top = NULL;
 
-
-node *start = NULL;
-node *top = NULL;
-
-
-node *getnode()
+void displayStack()
 {
-    node *temp;
-    temp = (node *)malloc(sizeof(node));
-    printf("\n Enter data ");
-    scanf("%d", &temp->data);
-    temp->next = NULL;
-    return temp;
+    struct Node *ptr = top;
+    while (ptr != NULL)
+    {
+        printf("%d \n", ptr->data);
+        ptr = ptr->next;
+    }
 }
 
-
-void push(node *newnode)
+int isEmpty()
 {
-    node *temp;
-    if (newnode == NULL)
-    {
-        printf("\n Stack Overflow..");
-        return;
-    }
-    if (start == NULL)
-    {
-        start = newnode;
-        top = newnode;
-    }
+    if (top == NULL)
+        return 1;
+    else
+        return 0;
+}
+
+int isFUll()
+{
+    struct Node *p = (struct Node *)malloc(sizeof(struct Node));
+    if (p == NULL)
+        return 1;
+    else
+        return 0;
+}
+
+void push(int x)
+{
+    if (isFUll())
+        printf("Stack Overflow");
     else
     {
-        temp = start;
-        while (temp->next != NULL)
-            temp = temp->next;
-        temp->next = newnode;
-        top = newnode;
+        struct Node *p = (struct Node *)malloc(sizeof(struct Node));
+        p->data = x;
+        p->next = top;
+        top = p;
     }
-    printf("\n\n\t Data pushed into stack");
 }
 void pop()
 {
-    node *temp;
-    if (top == NULL)
-    {
-        printf("\n\n\t Stack underflow");
-        return;
-    }
-    temp = start;
-    if (start->next == NULL)
-    {
-        printf("\n\n\t Popped element is %d ", top->data);
-        start = NULL;
-        free(top);
-        top = NULL;
-    }
+    if (isEmpty())
+        printf("Stack Underflow");
     else
     {
-        while (temp->next != top)
-        {
-            temp = temp->next;
-        }
-        temp->next = NULL;
-        printf("\n\n\t Popped element is %d ", top->data);
-        free(top);
-        top = temp;
+        struct Node *p = top;
+        top = (top)->next;
+        int x = p->data;
+        free(p);
     }
 }
-void displayStack()
+
+int peek(struct Node *top, int pos)
 {
-    node *temp;
-    if (top == NULL)
+    struct Node *ptr = top;
+    for (int i = 0; (i < pos - 1 && ptr != NULL); i++)
     {
-        printf("\n\n\t\t Stack is empty ");
+        ptr = ptr->next;
+    }
+    if (ptr != NULL)
+    {
+        return ptr->data;
     }
     else
     {
-        temp = start;
-        printf("\n\n\n\t\t Elements in the stack: \n");
-        printf("%5d ", temp->data);
-        while (temp != top)
-        {
-            temp = temp->next;
-            printf("%5d ", temp->data);
-        }
+        return 0;
     }
 }
