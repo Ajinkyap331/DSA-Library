@@ -3,6 +3,6 @@
 
 int main()
 {
-    print_lsa(2);
+    enqueue();
     return 0;
 }

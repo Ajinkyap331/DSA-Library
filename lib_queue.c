@@ -2,11 +2,13 @@
 
 struct Node *f = NULL;
 struct Node *r = NULL;
+
 struct Node
 {
     int data;
     struct Node *next;
 };
+
 void display(struct Node *ptr)
 {
     printf("Elements in the queue \n");
