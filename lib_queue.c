@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include<stdlib.h>
 struct Node *f = NULL;
 struct Node *r = NULL;
 
