@@ -5,34 +5,34 @@ struct LinkedlistNode
 {
     int data;
     struct LinkedlistNode *next;
-};
+}*stnode;
+
 
 struct LinkedlistNode *head = NULL;
+void createllnode(int num)
+{
+    struct LinkedlistNode *fnNode, *tmp;
+    stnode = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
 
-void displayLinkedlist()
-{   
+    if(stnode == NULL) //check whether the fnnode is NULL and if so no memory allocation
+    {
+       return ;
+    }
+    else
+    {
+// reads data for the node through keyboard
+        stnode->data = num;      
+        stnode->next = NULL; // links the address field to NULL
+        tmp = stnode;
 
-    struct LinkedlistNode *head;
-    struct LinkedlistNode *temp = head;
-    if (head == NULL)
-    {
-        printf("List is empty");
-        return;
     }
-    printf("[ ");
-    while (temp != NULL)
-    {
-        printf("%d-> ", temp->data);
-        temp = temp->next;
-    }
-    printf("NULL ]\n");
 }
+
 // Case 1
 int is_empty()
 {
-    if (head == NULL)
+    if (stnode == NULL)
     {
-        printf("the list is empty\n");
         return 1;
     }
     else
@@ -40,26 +40,27 @@ int is_empty()
         return 0;
     }
 }
-void insertAtFirstLinkedlist(int data)
+void insertAtHeadLl(int data)
 {
     if (is_empty())
     {
-        head->data = data;
-        head->next = NULL;
+        stnode->data = data;
+        stnode->next = NULL;
     }
     else
     {
         struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
         ptr->data = data;
-        ptr->next = head;
-        head = ptr;
+        ptr->next = stnode;
+        stnode = ptr;
     }
 }
 // Case 2
-void insertAtIndexLinkedlist(int data, int index)
+void insertAtIndexll(int data, int index)//
 {
+    struct LinkedlistNode *p;
+    p=stnode;
     struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
-    struct LinkedlistNode *p = head;
     int i = 0;
 
     while (i != index - 1)
@@ -70,36 +71,38 @@ void insertAtIndexLinkedlist(int data, int index)
     ptr->data = data;
     ptr->next = p->next;
     p->next = ptr;
+    
 }
 // Case 3
-void insertAtEndLinkedlist(int data)
+void insertAtEndll(int data)//
 {
 
     struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
     ptr->data = data;
-    struct LinkedlistNode *p = head;
+    struct LinkedlistNode *p = stnode;
     while (p->next != NULL)
     {
         p = p->next;
     }
     p->next = ptr;
     ptr->next = NULL;
+   
 }
 
 // Deleting first LinkedlistNode from the linked list
-void deleteAtfirstLinkedlist()
+void deleteAtHeadll()//
 {
-    struct LinkedlistNode *ptr = head;
-    head = head->next;
+    struct LinkedlistNode *ptr = stnode;
+    stnode = stnode->next;
     // Make as president
     free(ptr);
 }
 
 // Deleting a LinkedlistNode at particular index
-void deleteAtIndexLinkedlist(int index)
+void deleteAtIndexll(int index)//
 {
-    struct LinkedlistNode *p = head;
-    struct LinkedlistNode *q = head->next;
+    struct LinkedlistNode *p = stnode;
+    struct LinkedlistNode *q =stnode->next;
     // The q pointer should be present at the LinkedlistNode which has to be deleted
     for (int i = 0; i < index - 1; i++)
     {
@@ -110,10 +113,10 @@ void deleteAtIndexLinkedlist(int index)
     free(q);
 }
 // Deleting a LinkedlistNode at last
-void deletelastLinkedlist()
+void deletelastll()//
 {
-    struct LinkedlistNode *p = head;
-    struct LinkedlistNode *q = head->next;
+    struct LinkedlistNode *p = stnode;
+    struct LinkedlistNode *q = stnode->next;
     while (q->next != NULL)
     {
         p = p->next;
@@ -124,10 +127,14 @@ void deletelastLinkedlist()
     free(q);
 }
 // Deleting a LinkedlistNode having a given value
-void deleteLinkedlistNode(int value)
+void deleteAtvaluell(int value)//
 {
-    struct LinkedlistNode *p = head;
-    struct LinkedlistNode *q = head->next;
+    struct LinkedlistNode *p = stnode;
+    struct LinkedlistNode *q = stnode->next;
+    if(stnode->data==value){
+        deleteAtfirstLinkedlist();
+        return;
+    }
     while (q->data != value && q->next != NULL)
     {
         p = p->next;
@@ -137,5 +144,22 @@ void deleteLinkedlistNode(int value)
     {
         p->next = q->next;
         free(q);
+    }
+}
+void displayll()
+{   
+    struct LinkedlistNode *temp ;
+    if (stnode== NULL)
+    {
+        printf("List is empty");
+        return;
+    }
+    else{
+        temp =stnode;
+    while (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
     }
 }

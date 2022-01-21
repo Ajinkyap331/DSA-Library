@@ -20,10 +20,6 @@ int main()
     // pop();
     // displayStack();
 
-    insertAtFirstLinkedlist(1);
-    insertAtFirstLinkedlist(2);
-    insertAtFirstLinkedlist(3);
-    displayLinkedlist();
 
     return 0;
 }
