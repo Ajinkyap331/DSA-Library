@@ -1,59 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+struct LinkedlistNode
 {
     int data;
-    struct node *next;
-};
+    struct LinkedlistNode *next;
+}*stnode;
 
-void linkedlisttraversel(struct node *ptr)
+
+struct LinkedlistNode *head = NULL;
+void createllnode(int num)
 {
-    while (ptr != NULL)
+    struct LinkedlistNode *fnNode, *tmp;
+    stnode = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
+
+    if(stnode == NULL) //check whether the fnnode is NULL and if so no memory allocation
     {
-        printf("element : %d \n", ptr->data);
-        ptr = ptr->next;
+       return ;
+    }
+    else
+    {
+// reads data for the node through keyboard
+        stnode->data = num;      
+        stnode->next = NULL; // links the address field to NULL
+        tmp = stnode;
+
     }
 }
-// case 1;
-struct node *insertatbegining(struct node *head, int data)
-{
-    struct node *ptr = (struct node *)malloc(sizeof(struct node));
-    ptr->next = head;
-    ptr->data = data;
-    return ptr;
-}
-//  case 3;
 
-struct node *insertatend(struct node *head, int data)
+// Case 1
+int is_empty()
 {
-    struct node *ptr = (struct node *)malloc(sizeof(struct node));
-    ptr->data = data;
-    struct node *p = head;
-    while (p->next != NULL)
+    if (stnode == NULL)
     {
-        p = p->next;
+        return 1;
     }
-    p->next = ptr;
-    ptr->next = NULL;
-    return head;
+    else
+    {
+        return 0;
+    }
 }
-// case 4
-struct node *insertafter(struct node *head, struct node *prevnode, int data)
+void insertAtHeadLl(int data)
 {
-    struct node *ptr = (struct node *)malloc(sizeof(struct node));
-
-    ptr->data = data;
-    ptr->next = prevnode->next;
-    prevnode->next = ptr;
-    return head;
+    if (is_empty())
+    {
+        stnode->data = data;
+        stnode->next = NULL;
+    }
+    else
+    {
+        struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
+        ptr->data = data;
+        ptr->next = stnode;
+        stnode = ptr;
+    }
 }
-// case 2;
-struct node *insertinbetween(struct node *head, int data, int index)
+// Case 2
+void insertAtIndexll(int data, int index)//
 {
-    struct node *ptr = (struct node *)malloc(sizeof(struct node));
-    struct node *p = head;
+    struct LinkedlistNode *p;
+    p=stnode;
+    struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
     int i = 0;
+
     while (i != index - 1)
     {
         p = p->next;
@@ -62,41 +71,95 @@ struct node *insertinbetween(struct node *head, int data, int index)
     ptr->data = data;
     ptr->next = p->next;
     p->next = ptr;
-    return head;
+    
+}
+// Case 3
+void insertAtEndll(int data)//
+{
+
+    struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
+    ptr->data = data;
+    struct LinkedlistNode *p = stnode;
+    while (p->next != NULL)
+    {
+        p = p->next;
+    }
+    p->next = ptr;
+    ptr->next = NULL;
+   
 }
 
-int init()
+// Deleting first LinkedlistNode from the linked list
+void deleteAtHeadll()//
 {
-    struct node *head;
-    struct node *second;
-    struct node *third;
-    struct node *fourth;
-    // allocate memory  for the nodes in the linked the list in heap
-    // allocate memory  for the nodes in the linked the list in heap
-    head = (struct node *)malloc(sizeof(struct node));
-    second = (struct node *)malloc(sizeof(struct node));
-    third = (struct node *)malloc(sizeof(struct node));
-    fourth = (struct node *)malloc(sizeof(struct node));
-    // link first and second nodes
-    head->data = 7;
-    head->next = second;
-    // link  second and third  nodes
-    second->data = 11;
-    second->next = third;
-    // link third and fourth   nodes
-    third->data = 18;
-    third->next = fourth;
-    // terminate the list at the fourth  node
-    fourth->data = 66;
-    fourth->next = NULL;
+    struct LinkedlistNode *ptr = stnode;
+    stnode = stnode->next;
+    // Make as president
+    free(ptr);
+}
 
-    printf("linked list before insertion \n");
-    linkedlisttraversel(head);
-    // head = insertatbegining(head, 56);
-    // head = insertinbetween(head, 56, 1);
-    // head = insertatend(head, 56);
-    head = insertafter(head, second, 45);
-    printf("linked list after insertion \n");
-    linkedlisttraversel(head);
-    return 0;
+// Deleting a LinkedlistNode at particular index
+void deleteAtIndexll(int index)//
+{
+    struct LinkedlistNode *p = stnode;
+    struct LinkedlistNode *q =stnode->next;
+    // The q pointer should be present at the LinkedlistNode which has to be deleted
+    for (int i = 0; i < index - 1; i++)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    p->next = q->next;
+    free(q);
+}
+// Deleting a LinkedlistNode at last
+void deletelastll()//
+{
+    struct LinkedlistNode *p = stnode;
+    struct LinkedlistNode *q = stnode->next;
+    while (q->next != NULL)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    // Make as secretary
+    p->next = NULL;
+    free(q);
+}
+// Deleting a LinkedlistNode having a given value
+void deleteAtvaluell(int value)//
+{
+    struct LinkedlistNode *p = stnode;
+    struct LinkedlistNode *q = stnode->next;
+    if(stnode->data==value){
+        deleteAtfirstLinkedlist();
+        return;
+    }
+    while (q->data != value && q->next != NULL)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    if (q->data == value)
+    {
+        p->next = q->next;
+        free(q);
+    }
+}
+void displayll()
+{   
+    struct LinkedlistNode *temp ;
+    if (stnode== NULL)
+    {
+        printf("List is empty");
+        return;
+    }
+    else{
+        temp =stnode;
+    while (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    }
 }
