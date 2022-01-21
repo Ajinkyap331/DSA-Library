@@ -19,7 +19,7 @@ void displayStack()
     }
 }
 
-int isEmpty()
+int isStackEmpty()
 {
     if (top == NULL)
         return 1;
@@ -27,7 +27,7 @@ int isEmpty()
         return 0;
 }
 
-int isFUll()
+int isStackFull()
 {
     struct Node *p = (struct Node *)malloc(sizeof(struct Node));
     if (p == NULL)
