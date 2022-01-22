@@ -33,9 +33,13 @@ int main()
 
     // // LinkdedList
 
-    // //
-    //  createllnode(5);
-    //  displayll();
+    //
+     int *ptr=createllnode(5);
+     displayll();
+
+    
+    
+
 
 
     return 0;
