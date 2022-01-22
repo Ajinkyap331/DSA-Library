@@ -38,7 +38,7 @@ int isStackFull()
 
 void push(int x)
 {
-    if (isFUll())
+    if (isStackFull())
         printf("Stack Overflow");
     else
     {
@@ -50,7 +50,7 @@ void push(int x)
 }
 void pop()
 {
-    if (isEmpty())
+    if (isStackEmpty())
         printf("Stack Underflow");
     else
     {

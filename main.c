@@ -15,11 +15,13 @@ int main()
 
     // STACK DONE
 
-    // push(1);
-    // push(2);
-    // push(3);
-    // pop();
-    // displayStack();
+    push(1);
+    push(2);
+    push(3);
+    pop();
+    displayStack();
+
+    // LinkdedList
 
     //
      createllnode(5);

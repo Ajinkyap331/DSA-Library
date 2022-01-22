@@ -132,7 +132,7 @@ void deleteAtvaluell(int value)//
     struct LinkedlistNode *p = stnode;
     struct LinkedlistNode *q = stnode->next;
     if(stnode->data==value){
-        deleteAtfirstLinkedlist();
+        deleteAtHeadll();
         return;
     }
     while (q->data != value && q->next != NULL)
