@@ -70,7 +70,7 @@ void enqueue(Queue *f,int val)
         }
     }
 }
-void dequeue()
+void dequeue(Queue *f)
 {
     int val;
     struct queue *ptr = f;
