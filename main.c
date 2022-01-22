@@ -21,6 +21,10 @@ int main()
     // pop();
     // displayStack();
 
+    //
+     createllnode(5);
+     displayll();
+
 
     return 0;
 }

@@ -40,7 +40,7 @@ int is_empty()
         return 0;
     }
 }
-void insertAtHeadLl(int data)
+void insertAtHeadll(int data)
 {
     if (is_empty())
     {
@@ -113,7 +113,7 @@ void deleteAtIndexll(int index)//
     free(q);
 }
 // Deleting a LinkedlistNode at last
-void deletelastll()//
+void deleteAtlastll()//
 {
     struct LinkedlistNode *p = stnode;
     struct LinkedlistNode *q = stnode->next;
