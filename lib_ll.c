@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct LinkedlistNode
+typedef struct LinkedlistNode
 {
     int data;
     struct LinkedlistNode *next;
-}*stnode;
+}ll;
 
 
-struct LinkedlistNode *head = NULL;
+
 struct LinkedlistNode* createllnode(int num)
 {
-    struct LinkedlistNode *fnNode, *tmp;
-    stnode = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
+
+   ll* stnode = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
 
     if(stnode == NULL) //check whether the fnnode is NULL and if so no memory allocation
     {
@@ -22,17 +22,16 @@ struct LinkedlistNode* createllnode(int num)
     {
 // reads data for the node through keyboard
         stnode->data = num;      
-        stnode->next = NULL; // links the address field to NULL
-        tmp = stnode;
+        stnode->next = NULL; // links the address field to NUL
 
     }
     return stnode;
 }
 
 // Case 1
-int is_empty()
+int is_empty(ll *stnode)
 {
-    if (stnode == NULL)
+    if (stnode== NULL)
     {
         return 1;
     }
@@ -41,9 +40,9 @@ int is_empty()
         return 0;
     }
 }
-struct LinkedlistNode* insertAtHeadll(int data)
+struct LinkedlistNode* insertAtHeadll(int data,ll *stnode)
 {
-    if (is_empty())
+    if (is_empty(stnode))
     {
         stnode->data = data;
         stnode->next = NULL;
@@ -58,7 +57,7 @@ struct LinkedlistNode* insertAtHeadll(int data)
     return stnode;
 }
 // Case 2
-void insertAtIndexll(int data, int index)//
+void insertAtIndexll(int data, int index,ll *stnode)//
 {
     struct LinkedlistNode *p;
     p=stnode;
@@ -76,7 +75,7 @@ void insertAtIndexll(int data, int index)//
     
 }
 // Case 3
-void insertAtEndll(int data)//
+void insertAtEndll(int data,ll *stnode)//
 {
 
     struct LinkedlistNode *ptr = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
@@ -92,16 +91,16 @@ void insertAtEndll(int data)//
 }
 
 // Deleting first LinkedlistNode from the linked list
-void deleteAtHeadll()//
+ll *deleteAtHeadll(ll *stnode)//
 {
     struct LinkedlistNode *ptr = stnode;
     stnode = stnode->next;
-    // Make as president
     free(ptr);
+    return stnode;
 }
 
 // Deleting a LinkedlistNode at particular index
-void deleteAtIndexll(int index)//
+void deleteAtIndexll(int index,ll*stnode)//
 {
     struct LinkedlistNode *p = stnode;
     struct LinkedlistNode *q =stnode->next;
@@ -115,7 +114,7 @@ void deleteAtIndexll(int index)//
     free(q);
 }
 // Deleting a LinkedlistNode at last
-void deleteAtlastll()//
+void deleteAtlastll(ll *stnode)//
 {
     struct LinkedlistNode *p = stnode;
     struct LinkedlistNode *q = stnode->next;
@@ -129,12 +128,12 @@ void deleteAtlastll()//
     free(q);
 }
 // Deleting a LinkedlistNode having a given value
-void deleteAtvaluell(int value)//
+void deleteAtvaluell(int value,ll *stnode)//
 {
     struct LinkedlistNode *p = stnode;
     struct LinkedlistNode *q = stnode->next;
     if(stnode->data==value){
-        deleteAtHeadll();
+        deleteAtHeadll(stnode);
         return;
     }
     while (q->data != value && q->next != NULL)
@@ -148,7 +147,7 @@ void deleteAtvaluell(int value)//
         free(q);
     }
 }
-void displayll()
+void displayll(ll*stnode)
 {   
     struct LinkedlistNode *temp ;
     if (stnode== NULL)
