@@ -1,16 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-struct queue
+typedef struct queue
 {
     int data;
     struct queue *next;
-};
+} Queue;
 
-struct queue *f = NULL;
-struct queue *r = NULL;
 
-void displayQueue()
+struct queue * CreateQueue(int val){
+    struct queue *n = (struct queue *)malloc(sizeof(struct queue));
+    n->data = val;
+    n->next = NULL;
+    return n;
+}
+
+void displayQueue(Queue *f)
 {
     struct queue *ptr = f;
     printf("Elements in the queue \n");
@@ -19,9 +23,10 @@ void displayQueue()
         printf("%d ", ptr->data);
         ptr = ptr->next;
     }
+    printf("\n");
 }
 
-int isQueueEmpty()
+int isQueueEmpty(Queue *f)
 {
     if (f == NULL)
     {
@@ -45,7 +50,7 @@ int isQueueFull()
         return 0;
     }
 }
-void enqueue(int val)
+void enqueue(Queue *f,int val)
 {
     struct queue *n = (struct queue *)malloc(sizeof(struct queue));
     if (n == NULL)
@@ -58,18 +63,21 @@ void enqueue(int val)
         n->next = NULL;
         if (f == NULL)
         {
-            f = r = n;
+            f  = n;
         }
         else
         {
+            Queue * r = f;
+            while(r->next!=NULL){
+                r = r->next;
+            }
             r->next = n;
             r = n;
         }
     }
 }
-void dequeue()
+Queue* dequeue(Queue *f)
 {
-    int val;
     struct queue *ptr = f;
     if (f == NULL)
     {
@@ -78,7 +86,7 @@ void dequeue()
     else
     {
         f = f->next;
-        val = ptr->data;
         free(ptr);
     }
+    return f;
 }
