@@ -6,7 +6,7 @@
 int main()
 {
     // QUEUE DONE
-
+    
     // enqueue(1);
     // enqueue(2);
     // enqueue(3);
@@ -20,6 +20,9 @@ int main()
     // push(3);
     // pop();
     // displayStack();
+
+    Stack();
+    
 
 
     return 0;

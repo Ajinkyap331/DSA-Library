@@ -1,13 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+int countS = 0;
+struct stacks{
+    struct Node * top;
+}Stacks[100];
+
 struct Node
 {
     int data;
     struct Node *next;
 };
 
+
 struct Node *top = NULL;
+
+struct Node * Stack(){
+    Stacks[countS++].top == NULL;
+    return Stacks[countS++].top;
+}
 
 void displayStack()
 {
@@ -38,7 +50,7 @@ int isStackFull()
 
 void push(int x)
 {
-    if (isFUll())
+    if (isStackFull())
         printf("Stack Overflow");
     else
     {
@@ -50,7 +62,7 @@ void push(int x)
 }
 void pop()
 {
-    if (isEmpty())
+    if (isStackEmpty())
         printf("Stack Underflow");
     else
     {

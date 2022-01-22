@@ -1,16 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-struct queue
+typedef struct queue
 {
     int data;
     struct queue *next;
-};
+} Queue;
 
-struct queue *f = NULL;
+// struct queue *f = NULL;
 struct queue *r = NULL;
 
-void displayQueue()
+void displayQueue(Queue *f)
 {
     struct queue *ptr = f;
     printf("Elements in the queue \n");
@@ -21,7 +20,7 @@ void displayQueue()
     }
 }
 
-int isQueueEmpty()
+int isQueueEmpty(Queue *f)
 {
     if (f == NULL)
     {
@@ -45,7 +44,7 @@ int isQueueFull()
         return 0;
     }
 }
-void enqueue(int val)
+void enqueue(Queue *f,int val)
 {
     struct queue *n = (struct queue *)malloc(sizeof(struct queue));
     if (n == NULL)
@@ -62,6 +61,10 @@ void enqueue(int val)
         }
         else
         {
+            Queue * r = f;
+            while(r->next!=NULL){
+                r = r->next;
+            }
             r->next = n;
             r = n;
         }
