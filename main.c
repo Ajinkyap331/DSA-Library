@@ -21,8 +21,15 @@ int main()
     // pop();
     // displayStack();
 
-    Stack();
+    // LinkdedList
+
+    //
+     int *ptr=createllnode(5);
+     displayll();
+
     
+    
+
 
 
     return 0;

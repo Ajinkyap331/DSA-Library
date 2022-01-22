@@ -9,14 +9,14 @@ struct LinkedlistNode
 
 
 struct LinkedlistNode *head = NULL;
-void createllnode(int num)
+struct LinkedlistNode* createllnode(int num)
 {
     struct LinkedlistNode *fnNode, *tmp;
     stnode = (struct LinkedlistNode *)malloc(sizeof(struct LinkedlistNode));
 
     if(stnode == NULL) //check whether the fnnode is NULL and if so no memory allocation
     {
-       return ;
+       return NULL;
     }
     else
     {
@@ -26,6 +26,7 @@ void createllnode(int num)
         tmp = stnode;
 
     }
+    return stnode;
 }
 
 // Case 1
@@ -40,7 +41,7 @@ int is_empty()
         return 0;
     }
 }
-void insertAtHeadLl(int data)
+struct LinkedlistNode* insertAtHeadll(int data)
 {
     if (is_empty())
     {
@@ -54,6 +55,7 @@ void insertAtHeadLl(int data)
         ptr->next = stnode;
         stnode = ptr;
     }
+    return stnode;
 }
 // Case 2
 void insertAtIndexll(int data, int index)//
@@ -113,7 +115,7 @@ void deleteAtIndexll(int index)//
     free(q);
 }
 // Deleting a LinkedlistNode at last
-void deletelastll()//
+void deleteAtlastll()//
 {
     struct LinkedlistNode *p = stnode;
     struct LinkedlistNode *q = stnode->next;
@@ -132,7 +134,7 @@ void deleteAtvaluell(int value)//
     struct LinkedlistNode *p = stnode;
     struct LinkedlistNode *q = stnode->next;
     if(stnode->data==value){
-        deleteAtfirstLinkedlist();
+        deleteAtHeadll();
         return;
     }
     while (q->data != value && q->next != NULL)
