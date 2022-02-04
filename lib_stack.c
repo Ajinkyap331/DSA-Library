@@ -2,28 +2,17 @@
 #include <stdlib.h>
 
 
-int countS = 0;
-struct stacks{
-    struct Node * top;
-}Stacks[100];
-
 struct Node
 {
     int data;
     struct Node *next;
 };
 
-
 struct Node *top = NULL;
 
-struct Node * Stack(){
-    Stacks[countS++].top == NULL;
-    return Stacks[countS++].top;
-}
 
-void displayStack()
+void displayStack(struct Node *ptr)
 {
-    struct Node *ptr = top;
     while (ptr != NULL)
     {
         printf("%d \n", ptr->data);
@@ -48,7 +37,7 @@ int isStackFull()
         return 0;
 }
 
-void push(int x)
+void push(struct Node *ptr, int x)
 {
     if (isStackFull())
         printf("Stack Overflow");
@@ -56,8 +45,8 @@ void push(int x)
     {
         struct Node *p = (struct Node *)malloc(sizeof(struct Node));
         p->data = x;
-        p->next = top;
-        top = p;
+        p->next = ptr;
+        top = ptr;
     }
 }
 void pop()

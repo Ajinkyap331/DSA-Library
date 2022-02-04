@@ -2,11 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int main()
 {
     // QUEUE DONE
-    
+
     // enqueue(1);
     // enqueue(2);
     // enqueue(3);
@@ -24,13 +23,15 @@ int main()
     // LinkdedList
 
     //
-     int *ptr=createllnode(5);
-     displayll();
+    //  int *ptr=createllnode(5);
+    //  displayll();
 
-    
-    
-
-
+    struct Node *s = Stack();
+    struct Node *s1 = Stack();  
+    push(s, 1);
+    displayStack(s);
+    push(s1, 2);
+    displayStack(s1);
 
     return 0;
 }
