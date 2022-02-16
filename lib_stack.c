@@ -18,9 +18,10 @@ void displayStack(Stack *p)
 {
     while (p != NULL)
     {
-        printf("%d \n", p->data);
+        printf("%d ", p->data);
         p = p->next;
     }
+    printf("\n");
 }
 
 int isStackEmpty(Stack *p)
@@ -40,7 +41,7 @@ int isStackFull()
         return 0;
 }
 
-void push(Stack *p1, int x)
+Stack *  push(Stack *p1, int x)
 {
     if (isStackFull())
         printf("Stack Overflow");
@@ -50,21 +51,23 @@ void push(Stack *p1, int x)
         p->data = x;
         p->next = p1;
         p1 = p;
+        return p1;
     }
 }
 
 
 
-void pop(Stack *p1)
+Stack * pop(Stack *p1)
 {
     if (isStackEmpty(p1))
         printf("Stack Underflow");
     else
     {
         struct Node *p = p1;
-        p1 = (p1)->next;
+        p1 = p1->next;
         int x = p->data;
         free(p);
+        return p1;
     }
 }
 
