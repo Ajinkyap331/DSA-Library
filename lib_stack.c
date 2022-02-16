@@ -1,39 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-int countS = 0;
-struct stacks{
-    struct Node * top;
-}Stacks[100];
-
-struct Node
+typedef struct Node
 {
     int data;
     struct Node *next;
-};
+} Stack;
 
-
-struct Node *top = NULL;
-
-struct Node * Stack(){
-    Stacks[countS++].top == NULL;
-    return Stacks[countS++].top;
+struct Node * CreateStack(int val){
+    struct Node *n = (struct Node *)malloc(sizeof(struct Node));
+    n->data = val;
+    n->next = NULL;
+    return n;
 }
 
-void displayStack()
+void displayStack(Stack *p)
 {
-    struct Node *ptr = top;
-    while (ptr != NULL)
+    while (p != NULL)
     {
-        printf("%d \n", ptr->data);
-        ptr = ptr->next;
+        printf("%d \n", p->data);
+        p = p->next;
     }
 }
 
-int isStackEmpty()
+int isStackEmpty(Stack *p)
 {
-    if (top == NULL)
+    if (p == NULL)
         return 1;
     else
         return 0;
@@ -48,7 +40,7 @@ int isStackFull()
         return 0;
 }
 
-void push(int x)
+void push(Stack *p1, int x)
 {
     if (isStackFull())
         printf("Stack Overflow");
@@ -56,18 +48,21 @@ void push(int x)
     {
         struct Node *p = (struct Node *)malloc(sizeof(struct Node));
         p->data = x;
-        p->next = top;
-        top = p;
+        p->next = p1;
+        p1 = p;
     }
 }
-void pop()
+
+
+
+void pop(Stack *p1)
 {
-    if (isStackEmpty())
+    if (isStackEmpty(p1))
         printf("Stack Underflow");
     else
     {
-        struct Node *p = top;
-        top = (top)->next;
+        struct Node *p = p1;
+        p1 = (p1)->next;
         int x = p->data;
         free(p);
     }

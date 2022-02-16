@@ -25,6 +25,13 @@ int main()
 
     // STACK DONE
 
+    Stack *p1 = CreateStack(4);
+    Stack *p2 = CreateStack(8);
+    push(p1, 3);
+    push(p2, 4);
+    displayStack(p1);
+    displayStack(p2);
+
     // push(1);
     // push(2);
     // push(3);
