@@ -34,6 +34,7 @@ int main()
     p2 = push(p2, 4);
     p2 = push(p2, 8);
     displayStack(p2);
+    peek(p2, -1);
 
     // push(1);
     // push(2);

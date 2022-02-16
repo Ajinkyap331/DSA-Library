@@ -71,19 +71,20 @@ Stack * pop(Stack *p1)
     }
 }
 
-int peek(struct Node *top, int pos)
+void peek(Stack *p, int pos)
 {
-    struct Node *ptr = top;
-    for (int i = 0; (i < pos - 1 && ptr != NULL); i++)
+    Stack *ptr = p;
+    int i = 0;
+    for (; (i < pos && ptr != NULL); i++)
     {
         ptr = ptr->next;
     }
-    if (ptr != NULL)
+    if (ptr != NULL && i <= pos)
     {
-        return ptr->data;
+        printf("%d", ptr->data);
     }
     else
     {
-        return 0;
+        printf("No Element Found");
     }
 }
